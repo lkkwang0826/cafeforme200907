@@ -1,0 +1,165 @@
+#### 1. 컨테이너 클러스터 만들기
+#### 2. 컨테이너 레지스트리 만들기
+#### 3. (DevOps) Connection 연결
+- Setting - Pipeline - Service Connections
+Docker Registry - Azure Container Registry
+Service Connection name (acr) 설정
+
+#### 4. Cluster 연결 및 확인
+```
+az aks get-credentials --resource-group [azure-resource-Group-name] --name [azure-cluster-name]
+```
+```
+kubectl get svc
+```
+
+
+#### 5. AKS - ACR 연결
+```
+az aks update -n [azure-cluster-name] -g [azure-resource-Group-name] --attach-acr [azure-acr-name]
+```
+
+#### 6. Kafka 설치 (with Helm version 3.0 after)
+```
+curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
+kubectl --namespace kube-system create sa tiller
+```
+```
+kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
+```
+```
+helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubator
+```
+```
+helm repo update
+```
+```
+kubectl create ns kafka
+```
+```
+helm install my-kafka --namespace kafka incubator/kafka
+```
+
+#### 6. (DevOps) Common Value Setting
+- Pipelines - Library
+- Variable group name : common-value
+- containerRegistry : user23acrg.azurecr.io
+- containerRegistryDockerConnection : acr
+- environment : aks.default
+>azure-pipelines.yml
+```yml
+variables:
+- group: common-value
+  # containerRegistry: 'event.azurecr.io'
+  # containerRegistryDockerConnection: 'acr'
+  # environment: 'aks.default'
+```
+
+#### 7. (DevOps) Environment
+- Pipelines - Environment
+- Name : aks - Kubenetes - Cluster 선택 - Create
+
+#### 8. (DevOps) Create Pipeline   : 소스별 반복 
+- GitHub YAML
+- Project 선택 - Run
+
+#### 9. Kafka Topic 생성 및 확인
+- Azure
+```
+kubectl -n kafka exec my-kafka-0 -- /usr/bin/kafka-topics --zookeeper my-kafka-zookeeper:2181 --topic eventTopic --create --partitions 1 --replication-factor 1
+```
+```
+kubectl -n kafka exec my-kafka-0 -- /usr/bin/kafka-topics --zookeeper my-kafka-zookeeper:2181 --list
+```
+
+- Local
+```
+kafka-topics.bat --zookeeper localhost:2181 --topic eventTopic --create --partitions 1 --replication-factor 1
+```
+```
+kafka-topics.bat --zookeeper localhost:2181 --list
+```
+
+#### 10. Event 발행 및 수신
+- Azure
+- 발행
+```
+kubectl -n kafka exec -ti my-kafka-0 -- /usr/bin/kafka-console-producer --broker-list my-kafka:9092 --topic eventTopic
+```
+- 수신
+```
+kubectl -n kafka exec -ti my-kafka-0 -- /usr/bin/kafka-console-consumer --bootstrap-server my-kafka:9092 --topic eventTopic --from-beginning
+```
+- Local
+- 발행
+```
+bin/windows/kafka-console-producer.bat --broker-list http://localhost:9092 --topic eventTopic
+```
+- 수신
+```
+bin/windows/kafka-console-consumer.bat --bootstrap-server http://localhost:9092 --topic eventTopic --from-beginning
+```
+
+#### 11. Cloud 에 Httpie 설치 및 접속
+```
+cat <<EOF | kubectl apply -f -
+apiVersion: "v1"
+kind: "Pod"
+metadata: 
+  name: httpie
+  labels: 
+    name: httpie
+spec: 
+  containers: 
+    - 
+      name: httpie
+      image: clue/httpie
+      command:
+        - sleep
+        - "36000"
+EOF
+```
+```
+kubectl exec -it httpie bin/bash
+```
+
+#### 12. 실행 확인
+
+kubectl exec -it httpie bin/bash
+
+root@httpie:/# http customer:8080/orders
+
+root@httpie:/# http customer:8080/orders product="aa" qty=1 price=2
+
+결과확인
+HTTP/1.1 201
+Content-Type: application/json;charset=UTF-8
+Date: Thu, 14 May 2020 04:19:12 GMT
+Location: http://customer:8080/orders/1
+Transfer-Encoding: chunked
+
+{
+    "_links": {
+        "order": {
+            "href": "http://customer:8080/orders/1"
+        },
+        "self": {
+            "href": "http://customer:8080/orders/1"
+        }
+    },
+    "cannotOrderCanceled": false,
+    "price": 2,
+    "product": "aa",
+    "qty": 1,
+    "status": null
+}
+C
+
+
+
+
+
+## Site
+- DevOps (dev.azure.com)
+- Helm (https://github.com/helm)
+- Spring Initializer (https://start.spring.io/)
