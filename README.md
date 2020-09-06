@@ -9,8 +9,7 @@
 ![image](https://user-images.githubusercontent.com/63624054/92323879-2160fc00-f077-11ea-9f97-49b7bf6614fd.png)
 
 2. 운영 : CI/CD Pipeline Cluster 배포 환경 구축
-  (기존 소스 PiPeline결과 첨부)
-  
+![image](https://user-images.githubusercontent.com/63624054/92324515-6e47d100-f07d-11ea-8f61-4d0b82e7785c.png)
 ![image](https://user-images.githubusercontent.com/63624054/92324403-4f950a80-f07c-11ea-8280-28fa4896c0e2.png)
   
   
