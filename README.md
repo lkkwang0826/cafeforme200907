@@ -1,8 +1,14 @@
 ![image](https://user-images.githubusercontent.com/28293389/81536861-34084480-93a7-11ea-866f-c09e24ef9412.png)
 
-1차 평가시 미진 부분에 대하여 아래 결과를 추가 합니다.
+1차 평가시 미평가 영역 중 평가 요청 항목은 다음과 같습니다.
 1. 분석설계 : SAGA 패턴
+   Order Service와 Customer Service를 분리하여 구성
+   
+![image](https://user-images.githubusercontent.com/63624054/92323858-fb3b5c00-f076-11ea-886f-86ae3d679dd4.png)
+![image](https://user-images.githubusercontent.com/63624054/92323869-0db59580-f077-11ea-97c9-9f954abaeee8.png)
+![image](https://user-images.githubusercontent.com/63624054/92323879-2160fc00-f077-11ea-9f97-49b7bf6614fd.png)
 
+참고 : 1차 평가결과
 ![image](https://user-images.githubusercontent.com/63624054/92323598-f9709900-f074-11ea-9900-06bd88a8fc32.png)
 
 
