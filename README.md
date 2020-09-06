@@ -1,5 +1,11 @@
 ![image](https://user-images.githubusercontent.com/28293389/81536861-34084480-93a7-11ea-866f-c09e24ef9412.png)
 
+1차 평가시 미진 부분에 대하여 아래 결과를 추가 합니다.
+1. 분석설계 : SAGA 패턴
+
+![image](https://user-images.githubusercontent.com/63624054/92323598-f9709900-f074-11ea-9900-06bd88a8fc32.png)
+
+
 # 5조 - 카페포미
         이교광(개별)
 
