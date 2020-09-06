@@ -8,7 +8,8 @@
 ![image](https://user-images.githubusercontent.com/63624054/92323869-0db59580-f077-11ea-97c9-9f954abaeee8.png)
 ![image](https://user-images.githubusercontent.com/63624054/92323879-2160fc00-f077-11ea-9f97-49b7bf6614fd.png)
 
-참고 : 1차 평가결과
+[참고] 1차 평가결과
+
 ![image](https://user-images.githubusercontent.com/63624054/92323598-f9709900-f074-11ea-9900-06bd88a8fc32.png)
 
 
