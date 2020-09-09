@@ -12,11 +12,6 @@
 ![image](https://user-images.githubusercontent.com/63624054/92324515-6e47d100-f07d-11ea-8f61-4d0b82e7785c.png)
 ![image](https://user-images.githubusercontent.com/63624054/92324403-4f950a80-f07c-11ea-8280-28fa4896c0e2.png)
   
-  
-
-[참고] 1차 평가결과
-
-![image](https://user-images.githubusercontent.com/63624054/92323598-f9709900-f074-11ea-9900-06bd88a8fc32.png)
 
 
 # 5조 - 카페포미
